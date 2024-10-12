@@ -1,0 +1,45 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "20f533f37e7401922ecdaa2d045e6dfe"
+name = "kelsmar"
+handle = "kelsmar"
+application_url = "https://from-received-parts-chapters.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "kelsmar-dev.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = 'read_orders,read_customers,read_discounts,read_gift_cards,read_price_rules,read_products,read_returns,read_shipping'
+
+[auth]
+redirect_urls = [
+  "https://from-received-parts-chapters.trycloudflare.com/auth/callback",
+  "https://from-received-parts-chapters.trycloudflare.com/auth/shopify/callback",
+  "https://from-received-parts-chapters.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-10"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/data_request"
+  compliance_topics = [ "customers/data_request" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/redact"
+  compliance_topics = [ "customers/redact" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/shop/redact"
+  compliance_topics = [ "shop/redact" ]
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+[pos]
+embedded = false
